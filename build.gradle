@@ -1,0 +1,11 @@
+buildscript {
+    repositories {
+        mavenLocal()
+        mavenCentral()
+    }
+    dependencies {
+        classpath 'com.mparticle:android-kit-plugin:+'
+    }
+}
+
+apply plugin: 'com.mparticle.kit'
