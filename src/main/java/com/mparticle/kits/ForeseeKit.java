@@ -25,7 +25,7 @@ public class ForeseeKit extends KitIntegration {
 
     @Override
     public String getName() {
-        return "Foresee";
+        return "ForeSee";
     }
 
     @Override
