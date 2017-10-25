@@ -8,7 +8,7 @@ This repository contains the [ForeSee](https://www.foresee.com) integration for 
 
     ```groovy
     dependencies {
-        compile 'com.mparticle:android-foresee-kit:4+'
+        compile 'com.mparticle:android-foresee-kit:5+'
     }
     ```
 2. Follow the mParticle Android SDK [quick-start](https://github.com/mParticle/mparticle-android-sdk), then rebuild and launch your app, and verify that you see `"ForeSee detected"` in the output of `adb logcat`.
