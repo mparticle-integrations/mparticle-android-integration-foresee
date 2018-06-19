@@ -5,6 +5,8 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 
+import com.mparticle.kits_core.ReportingMessage;
+
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -15,7 +17,7 @@ import java.util.UUID;
  * primary use-case on the client-side. Everything else is forwarded server-side.
  *
  */
-public class ForeseeKit extends KitIntegration {
+public class ForeseeKit extends AbstractKitIntegration {
 
     public static final String ROOT_URL = "rootUrl";
     public static final String CLIENT_ID = "clientId";
@@ -29,7 +31,7 @@ public class ForeseeKit extends KitIntegration {
     }
 
     @Override
-    protected List<ReportingMessage> onKitCreate(Map<String, String> settings, Context context) throws IllegalArgumentException {
+    public List<ReportingMessage> onKitCreate(Map<String, String> settings, Context context) throws IllegalArgumentException {
         if (KitUtils.isEmpty(settings.get(CLIENT_ID)) ||
                 KitUtils.isEmpty(settings.get(ROOT_URL)) ||
                 KitUtils.isEmpty(settings.get(SURVEY_ID))) {
