@@ -5,7 +5,7 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 
-import com.mparticle.kits_core.ReportingMessage;
+import com.mparticle.kits.core.ReportingMessage;
 
 import java.util.List;
 import java.util.Map;
