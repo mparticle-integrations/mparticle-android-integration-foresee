@@ -16,7 +16,7 @@ This repository contains the [ForeSee](https://www.foresee.com) integration for 
 
 ### Documentation
 
-[ForeSee integration](http://docs.mparticle.com/?java#foresee)
+[ForeSee integration](https://docs.mparticle.com/integrations/foresee/event/)
 
 ### License
 
