@@ -3,7 +3,7 @@ package com.mparticle.kits
 import android.content.Context
 import android.content.pm.PackageManager.NameNotFoundException
 import android.net.Uri
-import java.util.*
+import java.util.UUID
 
 /**
  * This is not really a true embedded kit - it only supports getSurveyUrl, which is Foresee's
@@ -16,12 +16,14 @@ class ForeseeKit : KitIntegration() {
     @Throws(IllegalArgumentException::class)
     override fun onKitCreate(
         settings: Map<String, String>,
-        context: Context
+        context: Context,
     ): List<ReportingMessage> {
         require(
-            !(KitUtils.isEmpty(settings[CLIENT_ID]) ||
+            !(
+                KitUtils.isEmpty(settings[CLIENT_ID]) ||
                     KitUtils.isEmpty(settings[ROOT_URL]) ||
-                    KitUtils.isEmpty(settings[SURVEY_ID]))
+                    KitUtils.isEmpty(settings[SURVEY_ID])
+            ),
         ) { "Foresee missing required settings." }
         return emptyList()
     }
@@ -37,14 +39,15 @@ class ForeseeKit : KitIntegration() {
      */
     override fun getSurveyUrl(
         userAttributes: Map<String, String>,
-        userAttributeLists: Map<String, List<String>>
+        userAttributeLists: Map<String, List<String>>,
     ): Uri? {
         val baseUrl = settings[ROOT_URL] ?: return null
         var builder = Uri.parse(baseUrl).buildUpon()
-        builder = builder
-            .appendQueryParameter("cid", settings[CLIENT_ID])
-            .appendQueryParameter("sid", settings[SURVEY_ID])
-            .appendQueryParameter("rid", UUID.randomUUID().toString())
+        builder =
+            builder
+                .appendQueryParameter("cid", settings[CLIENT_ID])
+                .appendQueryParameter("sid", settings[SURVEY_ID])
+                .appendQueryParameter("rid", UUID.randomUUID().toString())
         val cpps = StringBuilder()
         if (settings[SEND_APP_VERSION].toBoolean()) {
             try {
@@ -66,12 +69,17 @@ class ForeseeKit : KitIntegration() {
                     value is Double -> strValue = value.toString()
                     value != null -> strValue = value.toString()
                 }
-                cpps.append("cpp[").append(key).append("]=").append(strValue).append("&")
+                cpps
+                    .append("cpp[")
+                    .append(key)
+                    .append("]=")
+                    .append(strValue)
+                    .append("&")
             } catch (e: Exception) {
             }
         }
 
-        //remove the extra &
+        // remove the extra &
         if (cpps.isNotEmpty()) {
             cpps.delete(cpps.length - 1, cpps.length)
         }
